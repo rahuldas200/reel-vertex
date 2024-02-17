@@ -1,0 +1,26 @@
+.hero-container{
+    background: #2d2d31ad;
+    border: 2px solid white;
+    background-color: filter;
+}
+.hero-p{
+    font-family: 'Source Code Pro', monospace;
+}
+.typeWriter{
+    font-family: 'Roboto Mono', monospace;
+}
+.steps-img{
+    animation: bounce 5s infinite; /* Change the animation name, duration, and iteration count as needed */
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px); /* Adjust the amount of bounce as needed */
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
