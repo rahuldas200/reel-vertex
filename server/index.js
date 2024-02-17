@@ -17,12 +17,12 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(
-    cors({
-        origin: 'http://localhost:3000'
+// app.use(
+//     cors({
+//         origin: 'http://localhost:3000'
         
-    })
-)
+//     })
+// )
 app.use("/api/v1/auth",userRoute);
 
 app.get('/', (req, res) => {

@@ -22,29 +22,29 @@ const Testimoni = () => {
     ]
     
   return (
-    <section class="bg-white">
-        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+    <section className="bg-black ">
+        <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl text-richblack-50">
                 Read trusted reviews from our user
             </h2>
 
-            <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
                 {
                     data.map((element,index) =>(
 
-                    <blockquote key={index} class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-                        <div class="flex items-center gap-4">
+                    <blockquote key={index} className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8 text-richblack-900 bg-richblack-200">
+                        <div className="flex items-center gap-4">
                         <img
                             alt=""
                             src={element.image}
-                            class="size-14 rounded-full object-cover"
+                            className="size-14 rounded-full object-cover"
                         />
 
                         <div>
-                            <div class="flex justify-center gap-0.5 text-green-500">
+                            <div className="flex justify-center gap-0.5 text-green-500 ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5 text-[#ED2121]"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -54,7 +54,7 @@ const Testimoni = () => {
                             </svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5 text-[#ED2121]"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -64,7 +64,7 @@ const Testimoni = () => {
                             </svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5 text-[#ED2121]"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -74,7 +74,7 @@ const Testimoni = () => {
                             </svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5 text-[#ED2121]"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -84,7 +84,7 @@ const Testimoni = () => {
                             </svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5 "
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -94,11 +94,11 @@ const Testimoni = () => {
                             </svg>
                             </div>
 
-                            <p class="mt-0.5 text-lg font-medium text-gray-900">{element.name}</p>
+                            <p className="mt-0.5 text-lg font-medium text-gray-900">{element.name}</p>
                         </div>
                         </div>
 
-                        <p class="mt-4 text-gray-700">
+                        <p className="mt-4 text-gray-700">
                            {element.text}
                         </p>
                     </blockquote>

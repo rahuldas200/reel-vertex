@@ -11,18 +11,14 @@ const Navbar = () => {
   }
 
   return (
-    <div onClick={() =>handleClik(true)} className=''>
+    <div onClick={() =>handleClik(true)} className='bg-[#4608ad] border-b-black border-b-[1px]'>
         <nav className='navbar'>
         <div>
-          <img src={logo} width={150} alt=''></img>
+          <img src={logo} width={150} alt='' className='text-white'></img>
         </div>
         <div className=' flex max-sm:hidden gap-3'>
-          <button className='button1'>
-            <span>Sign up</span>
-          </button>
-          <button className='button1'>
-            <span>Login</span>
-          </button>
+          <button class="button-85" role="button">Sign in</button>
+          <button class="button-85" role="button">Sign up</button>
         </div>
 
         <button onClick={() => handleClik(true)} className=' max-sm:flex hidden justify-center items-center '>

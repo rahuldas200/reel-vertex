@@ -8,8 +8,10 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
+    <div className="App bg-black">
+      <div className='bg-[#4608ad]'>
+        <Navbar/>
+      </div>
       <div>
         <HeroSection/>
       </div>
