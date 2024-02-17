@@ -1,0 +1,3 @@
+.animation{ 
+    animation-timing-function: steps(10, end);
+}

@@ -76,7 +76,7 @@
     -webkit-filter: blur(5px); */
     width: calc(100% + 4px);
     height: calc(100% + 4px);
-    animation: glowing-button-85 20s linear infinite;
+    animation: glowing-button-85 20s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
     transition: opacity 0.3s ease-out;
     border-radius: 10px;
   }

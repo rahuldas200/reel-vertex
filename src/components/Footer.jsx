@@ -1,7 +1,8 @@
 import React from 'react'
 import { BsTwitterX } from "react-icons/bs";
-import { FaFacebook } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook , FaLinkedin , FaGithub } from "react-icons/fa";
+
+
 const Footer = () => {
 
     const data = {
@@ -47,7 +48,7 @@ const Footer = () => {
         {
             icon:FaFacebook,
             iconUrl:"faceBook.com",
-            color:"text-blue-700"
+            color:"text-blue-500"
         },
         {
             icon:BsTwitterX,
@@ -57,12 +58,12 @@ const Footer = () => {
         {
             icon:FaLinkedin,
             iconUrl:"faceBook.com",
-            color:"text-blue-700"
+            color:"text-blue-500"
         },
         {
-            icon:FaFacebook,
+            icon:FaGithub,
             iconUrl:"faceBook.com",
-            color:"text-blue-700"
+            color:"text-richblack-900"
         }
     ]
 
@@ -116,7 +117,7 @@ const Footer = () => {
                     </div>
                 </div>
                 </div>
-                <hr className="my-6 border-blueGray-300"/>
+                <hr className="my-6 "/>
                 <div className="flex flex-wrap items-center md:justify-between justify-center">
                 <div className="w-full md:w-4/12 px-4 mx-auto text-center">
                     <div className="text-sm text-blueGray-500 font-semibold py-1">

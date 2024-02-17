@@ -65,7 +65,7 @@ const HeroSection = () => {
                             value = {formData.link}
                             onChange={changeHandler}
                             placeholder='Paste your link here'
-                            className='w-full bg-richblack-900 rounded-md text-richblack-900 text-base py-4 pl-10 pr-24 max-sm:py-2' 
+                            className='w-full bg-richblack-900 rounded-md text-richblack-200 text-base py-4 pl-10 pr-24 max-sm:py-2' 
                         />
 
                         <div className='absolute top-5 left-3 max-sm:top-3'>
