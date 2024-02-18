@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Nav.css'
 import logo from '../../assets/logo.png'
 import { IoReorderThree } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [visible , setVisible] = useState(false);
@@ -11,14 +12,18 @@ const Navbar = () => {
   }
 
   return (
-    <div onClick={() =>handleClik(true)} className='bg-[#4608ad] border-b-black border-b-[1px]'>
+    <div  className='bg-[#4608ad] border-b-black border-b-[1px]'>
         <nav className='navbar'>
         <div>
           <img src={logo} width={150} alt='' className='text-white'></img>
         </div>
         <div className=' flex max-sm:hidden gap-3'>
-          <button class="button-85" role="button">Sign in</button>
-          <button class="button-85" role="button">Sign up</button>
+          <Link to={"/login"}>
+            <button class="button-85" role="button">Login</button>
+          </Link>
+          <Link to={"/signin"}>
+            <button class="button-85" role="button">Sign up</button>
+          </Link>
         </div>
 
         <button onClick={() => handleClik(true)} className=' max-sm:flex hidden justify-center items-center '>
@@ -32,7 +37,9 @@ const Navbar = () => {
                 <IoReorderThree className='text-3xl text-white'/>
               </button>
               <div className='flex flex-col gap-5 mt-5 '>
-                <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
+                <Link to={"/login"}>
+                  <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
+                </Link>
                 <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md'>Sign up</button>
               </div>
             </div>

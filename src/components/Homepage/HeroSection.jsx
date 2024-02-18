@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import hero from '../assets/hero.jpg'
-import '../components/hero.css'
+import './hero.css'
 import { IoSearch } from "react-icons/io5";
 import { Typewriter } from 'react-simple-typewriter'
-import { fetchReel } from '../services/fetchReel';
+import { fetchReel } from '../../services/fetchReel';
 import { BsDownload } from "react-icons/bs";
 
 const HeroSection = () => {
@@ -14,23 +13,25 @@ const HeroSection = () => {
     });
 
     const changeHandler = (event) => {
-        setFormData( (preData) => (
+        setFormData( (prevData) => (
             {
-                ...preData,
+                ...prevData,
                 [event.target.name]:event.target.value
             }
         ))
     }
 
     const handleUplad  = async () =>{        
-        try{
+        try {
             const response  = await fetchReel(formData.link);
-            console.log(response);
             setDownload_link(response?.result[0]?.url);
-        } catch(error){
+
+        } 
+        catch(error){
             console.log(error);
         }
        
+        
     }
 
 

@@ -1,29 +1,8 @@
 
-import './App.css';
-import Navbar from './components/common/Navbar'
-import HeroSection from './components/HeroSection';
-import Steps from './components/Steps';
-import Testimoni from './components/Testimoni';
-import Footer from './components/Footer';
-
 function App() {
   return (
-    <div className="App bg-black">
-      <div className='bg-[#4608ad]'>
-        <Navbar/>
-      </div>
-      <div>
-        <HeroSection/>
-      </div>
-      <div className='w-full steps-bg'>
-        <Steps/>
-      </div>
-      <div className='w-full testimoni'>
-       <Testimoni/>
-      </div>
-      <div>
-        <Footer/>
-      </div>
+    <div>
+      
     </div>
   );
 }

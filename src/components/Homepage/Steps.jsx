@@ -1,5 +1,5 @@
 import React from 'react'
-import videoUpload from '../assets/videoUpload.png'
+import videoUpload from '../../assets/videoUpload.png'
 import "./step.css"
 
 const Steps = () => {
