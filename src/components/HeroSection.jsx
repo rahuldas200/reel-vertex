@@ -4,11 +4,10 @@ import '../components/hero.css'
 import { IoSearch } from "react-icons/io5";
 import { Typewriter } from 'react-simple-typewriter'
 import { fetchReel } from '../services/fetchReel';
+import { BsDownload } from "react-icons/bs";
 
 const HeroSection = () => {
     const [download_link , setDownload_link] = useState(null);
-
-    console.log(download_link);
 
     const [formData, setFormData] = useState( {
         link:'',
@@ -27,7 +26,7 @@ const HeroSection = () => {
         try{
             const response  = await fetchReel(formData.link);
             console.log(response);
-            setDownload_link(response.result[0]?.url);
+            setDownload_link(response?.result[0]?.url);
         } catch(error){
             console.log(error);
         }
@@ -41,7 +40,7 @@ const HeroSection = () => {
         <div className=' w-full h-full flex flex-col justify-center items-center font-inter'>
             <div className='flex flex-col items-center min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] 
                 hero-container p-10 max-sm:p-1 rounded-lg gap-3 max-sm:gap-2 max-sm:min-w-[80%] max-sm:max-w-[90%] max-sm:mt-10 max-sm:min-h-[90%]'>
-                <div className='text-4xl font-bold text-richblack-5 max-sm:p-0'> <span className='typeWriter max-sm:text-base'>Download </span> 
+                <div className='text-4xl font-bold text-richblack-5 max-sm:p-0'> <span className='typeWriterI max-sm:text-base'>Download </span> 
                     <span className='typeWriter max-sm:text-base'>
                         <Typewriter
                             words={['instragram Video', 'instragram reel', 'instragram post']}
@@ -65,24 +64,26 @@ const HeroSection = () => {
                             value = {formData.link}
                             onChange={changeHandler}
                             placeholder='Paste your link here'
-                            className='w-full bg-richblack-900 rounded-md text-richblack-200 text-base py-4 pl-10 pr-24 max-sm:py-2' 
+                            className='w-full bg-richblack-900 rounded-md text-richblack-200 text-base py-4 pl-10 pr-32 max-sm:pr-24  max-sm:py-2' 
                         />
 
                         <div className='absolute top-5 left-3 max-sm:top-3'>
                             <IoSearch className='text-lg text-richblack-25'/>
                         </div>
                         <button onClick={() => handleUplad()} className='absolute right-3 top-[6px] bg-[#4608ad] py-2 px-5 max-sm:py-[2px] max-sm:px-2 max-sm:top-[6px] font-mono rounded-md ml-2'>
-                                <span className='text-lg text-richblack-5 font-medium max-sm:text-sm'>Upload</span>
+                                <span className='text-lg font-inter text-richblack-5 font-medium max-sm:text-sm'>Upload</span>
                         </button>
                        
                     </div>
                    
                         
                 </div>
+                
 
                 {
                     download_link !== null && (
-                        <button className='p-2 rounded-md bg-blue-400'>
+                        <button className='py-2 px-3 mt-5 rounded-md bg-black text-richblack-25 flex gap-3 items-center'>
+                            <BsDownload className='text-[#ED2121] font-bold'/>
                             <a href = {download_link}> Download </a>
                         </button>
                     )

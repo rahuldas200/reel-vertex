@@ -8,7 +8,7 @@ const {videoDownload} = require("../controller/videoDownload");
 router.post("/signup",signUp);
 router.post("/login",login);
 router.post("/sendotp",sendOtp);
-router.post("/downloadvideo",videoDownload);
+router.get("/downloadvideo",videoDownload);
 
 
 module.exports = router

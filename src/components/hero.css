@@ -1,7 +1,17 @@
 
 
 .typeWriter{
-    font-family: 'Roboto Mono', monospace;
+  background: #E10000;
+background: linear-gradient(to right, #E10000 0%, #FFFFFF 90%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;  
+}
+.typeWriterI{
+  background: #E10000;
+background: linear-gradient(to right, #E10000 100%, #FFFFFF 18%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
 }
 .steps-img{
     animation: bounce 5s infinite; /* Change the animation name, duration, and iteration count as needed */

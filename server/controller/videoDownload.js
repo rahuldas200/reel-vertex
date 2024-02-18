@@ -6,7 +6,7 @@ const apihost = process.env.X_REPIDAPI_HOST;
 exports.videoDownload = async (req,res) => {
     
     try {
-        const { link } = req.body;
+        const  link  = req.headers['link'];
         console.log(link);
 
         if(!link){
@@ -35,10 +35,10 @@ exports.videoDownload = async (req,res) => {
         const response = await axios.request(options);
         // Log the entire response to inspect its structure
 
-        if (response.data) {
+        if (response?.data) {
             return res.status(200).json({
                 success: true,
-                data:response.data, // Assuming the data you need is in the response body
+                data:response?.data, // Assuming the data you need is in the response body
             });
         } else {
             // Handle unexpected response structure

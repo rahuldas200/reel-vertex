@@ -4,13 +4,15 @@ import { downLoadEndPoints } from "./apis";
 
 const { DOWNLOAD_URL } = downLoadEndPoints;
 
+console.log(DOWNLOAD_URL);
+
 export const fetchReel = async (urlObject) => {
     let result;
     const toastId = toast.loading("Uploading your link");
 
     try {        
         
-        const response = await apiConnector("POST",DOWNLOAD_URL,{link:urlObject},null,null);
+        const response = await apiConnector("GET",DOWNLOAD_URL,null,{link:urlObject},null);
 
         console.log("FOWNLOAD REEL API RESPONSE",response);
 

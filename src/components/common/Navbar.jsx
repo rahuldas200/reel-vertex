@@ -28,8 +28,8 @@ const Navbar = () => {
         {
           visible === true && (
             <div className='absolute w-[40%] p-2 bg-richblack-5 h-screen z-10 top-0 right-0   visible'>
-              <button onClick={() =>handleClik(true)} className=' max-sm:flex hidden justify-center items-center '>
-                <IoReorderThree className='text-3xl'/>
+              <button onClick={() =>handleClik(true)} className=' max-sm:flex hidden justify-center items-center text-white '>
+                <IoReorderThree className='text-3xl text-white'/>
               </button>
               <div className='flex flex-col gap-5 mt-5 '>
                 <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
