@@ -21,7 +21,7 @@ const Navbar = () => {
           <Link to={"/login"}>
             <button class="button-85" role="button">Login</button>
           </Link>
-          <Link to={"/signin"}>
+          <Link to={"/signup"}>
             <button class="button-85" role="button">Sign up</button>
           </Link>
         </div>
@@ -40,7 +40,9 @@ const Navbar = () => {
                 <Link to={"/login"}>
                   <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
                 </Link>
-                <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md'>Sign up</button>
+                <Link>
+                  <button className='py-1 px-2 border-solid border-[1px] border-richblack-900 rounded-md'>Sign up</button>
+                </Link>
               </div>
             </div>
           )

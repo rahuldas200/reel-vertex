@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter,RouterProvider,} from "react-router-dom";
 import HomePage from './components/Homepage/HomePage';
 import SignIn from './components/auth/SignIn';
+import Register from './components/auth/Register';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element : <div className=' bg-black'><SignIn/></div>
+  },
+  {
+    path:"/signup",
+    element:<div className='bg-black'> <Register/> </div>
   }
 ]);
 

@@ -35,7 +35,6 @@ const HeroSection = () => {
     }
 
 
-
   return (
     <div className='w-[100%] my-0 mx-auto relative h-[70%] overflow-hidden z-0 bg-[#4608ad]'>
         <div className=' w-full h-full flex flex-col justify-center items-center font-inter'>
