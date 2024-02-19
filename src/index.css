@@ -15,7 +15,15 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+::-webkit-scrollbar {
+  width:10px;
+}
+::-webkit-scrollbar-track{
+  background-color:black;
+}
+::-webkit-scrollbar-thumb{
+  background-color:red;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
