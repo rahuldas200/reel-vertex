@@ -16,7 +16,7 @@ body {
   box-sizing: border-box;
 }
 ::-webkit-scrollbar {
-  width:10px;
+  width:3px;
 }
 ::-webkit-scrollbar-track{
   background-color:black;
@@ -28,4 +28,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* body {
+  overflow: ${visible ? 'hidden' : 'auto'};
+} */
 
