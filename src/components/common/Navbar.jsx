@@ -36,7 +36,7 @@ const Navbar = () => {
       {
         visible && (
           <div className='fixed inset-0 flex items-center justify-center  bg-[#000000c4] z-50'>
-            <div className='bg-[#fe3333] p-4 rounded-lg'>
+            <div className='bg-richblack-200 p-4 rounded-lg'>
               <button onClick={handleToggle} className='absolute top-0 left-0 m-4 text-white'>
                 <RxCross2 className='text-2xl text-red-500'/>
               </button>

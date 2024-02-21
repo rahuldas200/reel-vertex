@@ -3,27 +3,37 @@ import { TEInput, TERipple } from "tw-elements-react";
 import Navbar from "../common/Navbar";
 import LoginImg from "../../assets/Login-amico.svg"
 import { useForm } from 'react-hook-form';
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaRegEye } from "react-icons/fa6";
-
+import { FaRegEyeSlash , FaRegEye} from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
 
-  const [showEye , setShowEye] = useState(false);
+  const [showPassword , setShowPassword] = useState(true);
 
   const passwordCheck = (cundition) => {
-    setShowEye(!cundition);
+    setShowPassword(!cundition);
   }
-
-  console.log(showEye);
 
   const {
     register,
     handleSubmit,
-    getData,
-    setData,
+    setValues,
+    getValues,
+    reset,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = async () => {
+    const data = getValues();
+
+    if(data.password.length < 5){
+      toast.error("Password length must be gatter than 5");
+      return;
+    }
+    reset();
+    console.log(data);
+  }
+  
 
 
 
@@ -49,7 +59,8 @@ const SignIn = () => {
 
             {/* <!-- Right column container md:w-8/12 lg:w-5/12 xl:w-5/12 md:mb-0 --> */}
             <div className=" bg-richblack-300 p-5 max-sm:p-3 rounded-md max-lg:min-w-full w-[50%]">
-              <form>
+
+              <form onSubmit={handleSubmit(onSubmit)}>
                 {/* <!--Sign in section--> */}
                 <div className="flex flex-row items-center justify-start lg:justify-start">
                   <p className="mb-0 mr-4 text-lg font-semibold text-black">Login with</p>
@@ -118,40 +129,55 @@ const SignIn = () => {
 
                 {/* <!-- Email input --> */}
                 <div className="flex flex-col gap-4">
-                  <input
-                    type="email"
-                    {...register('email', { required: true })}
-                    className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
-                    placeholder="Enter you email"
-                  />
+                  <div>
+                    <input
+                      type="email"
+                      id="email"
+                      {...register('email', { required: true })}
+                      className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
+                      placeholder="Enter you email"
+                    />
+                    {
+                      errors?.email && (
+                        <p className="text-[#d62929]">please enter your email</p>
+                      )
+                    }
+                  </div>
+
                   
                   {/* <!--Password input--> */}
                   <div className="relative">
                       <input
-                        type={`${showEye ? "password" : "text"}`}
+                        type={showPassword ? "password" : "text"}
+                        id="password"
                         {...register('password', { required: true })}
                         className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
                         placeholder="Enter you password"
                       />
-                      <button onClick={passwordCheck} className="absolute top-3 right-4">
+                      <span onClick={() => setShowPassword( (prev) => !prev)} className="absolute top-3 right-4">
                         {
-                          showEye ? (<FaRegEye className="text-richblack-25 text-2xl"/>) : (<FaRegEyeSlash className="text-richblack-25 text-2xl"/>)
+                          showPassword ? (<FaRegEyeSlash className="text-richblack-100 text-xl"/>) : (<FaRegEye className="text-richblack-100 text-xl"/>)
                         }
-                      </button>
+                      </span>
+                      {
+                        errors?.password && (
+                          <p className="text-[#d62929]">please enter your password</p>
+                        )
+                    }
                   </div>
                   
                 </div>
  
                 <div className="mb-6 flex items-center justify-between mt-6">
                   {/* <!--Forgot password link--> */}
-                  <a href="#!" className="text-base font-semibold text-black">Forgot password?</a>
+                  <a href="" className="text-base font-semibold text-black">Forgot password?</a>
                 </div>
 
                 {/* <!-- Login button --> */}
                 <div className="text-center lg:text-left">
                   <TERipple rippleColor="light">
                     <button
-                      type="button"
+                      type="submit"
                       className="inline-block rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                     >
                       Login

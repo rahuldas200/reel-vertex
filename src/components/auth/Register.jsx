@@ -2,14 +2,46 @@ import React from 'react'
 import { TEInput, TERipple } from "tw-elements-react";
 import Navbar from "../common/Navbar";
 import registerImg from "../../assets/register.svg"
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { FaRegEyeSlash , FaRegEye} from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 
 
 const Register = () => {
+
+  const [showPassword , setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    setValues,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async () => {
+    const data = getValues();
+
+    if(data.password.length < 5){
+      toast.error("Password length must be gatter than 5");
+      return;
+    }
+    reset();
+    navigate("/signup/otp")
+    
+  }
+
   return (
     <>
       <Navbar/>
-      <section className="h-full w-10/12 mx-auto min-h-screen max-sm:w-11/12 flex  items-center justify-center max-lm:w-9/12">
+      <section className="h-full w-10/12 mx-auto min-h-screen max-sm:w-11/12 flex mt-2 items-center justify-center max-lm:w-9/12">
     
       <div className="h-full w-full  ">
         {/* <!-- Left column container with background--> */}
@@ -25,7 +57,7 @@ const Register = () => {
 
           {/* <!-- Right column container md:w-8/12 lg:w-5/12 xl:w-5/12 md:mb-0 --> */}
           <div className=" bg-richblack-300 p-5 max-sm:p-3 rounded-md max-lg:min-w-full w-[50%] ">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               {/* <!--Sign in section--> */}
               <div className="flex flex-row items-center justify-start lg:justify-start">
                 <p className="mb-0 mr-4 text-lg font-semibold text-black">Login with</p>
@@ -102,22 +134,36 @@ const Register = () => {
               <div className="flex flex-col gap-4">
                   <div className='flex gap-3 w-full max-sm:flex-col'>
                     <div className='flex flex-col gap-2 w-full'>
-                      <label htmlFor="" className='text-black'>First name</label>
+                      <label htmlFor="email" className='text-black'>First name</label>
                       <input
-                      type="email"
+                      type="text"
+                      id='firstName'
+                      {...register("firstName",{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md "
                       placeholder="Enter your first name"
                       />
+                      {
+                        errors?.firstName && (
+                          <p className="text-[#d62929]">please enter your Last name</p>
+                        )
+                      }
+                      
                     </div>
 
-                    {/* <!--Password input--> */}
                     <div className='flex flex-col gap-2 w-full'>
-                      <label htmlFor="" className='text-base'>Last name</label>
+                      <label htmlFor="lastName" className='text-base'>Last name</label>
                       <input
-                      type="email"
+                      type="text"
+                      id='lastName'
+                      {...register('lastName',{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
                       placeholder="Enter your last name"
                       />
+                      {
+                        errors?.lastName && (
+                          <p className="text-[#d62929]">please enter your Last name</p>
+                        )
+                      }
                     </div>
                   </div>
 
@@ -125,62 +171,67 @@ const Register = () => {
                     <label htmlFor="" className='text-base'>Email</label>
                     <input
                     type="email"
+                    id='email'
+                    {...register('email',{required:true})}
                     className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
                     placeholder="Enter your email"
                     />
+                    {
+                      errors?.email && (
+                        <p className="text-[#d62929]">please enter your email</p>
+                      )
+                    }
                   </div>
 
                   <div className='flex gap-2 max-sm:flex-col'>
-                    <div className='flex flex-col gap-2 w-full'>
+                    <div className='flex flex-col gap-2 w-full relative'>
                       <label htmlFor="" className='text-base'>Password</label>
                       <input
-                      type="email"
+                      type={showPassword ? "password":"text"}
+                      id='password'
+                      {...register("password",{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
                       placeholder="Enter your password"
                       />
+                      <span onClick={() => setShowPassword( (prev) => !prev)} className="absolute top-12 right-4">
+                        {
+                          showPassword ? (<FaRegEyeSlash className="text-richblack-100 text-xl"/>) : (<FaRegEye className="text-richblack-100 text-xl"/>)
+                        }
+                      </span>
+                      {
+                        errors?.password && (
+                          <p className="text-[#d62929]">please enter your password</p>
+                        )
+                      }
                     </div>
-                    <div className='flex flex-col gap-2 w-full'>
+                    <div className='flex flex-col gap-2 w-full relative'>
                       <label htmlFor="" className='text-base'>Confirm Password</label>
                       <input
-                      type="email"
+                      type={showConfirmPassword ?"password":"text"}
+                      id='confirmPassword'
+                      {...register("confirmPassword",{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
                       placeholder="Enter your confirm password"
                       />
+                       <span onClick={() => setShowConfirmPassword( (prev) => !prev)} className="absolute top-12 right-4">
+                        {
+                          showConfirmPassword ? (<FaRegEyeSlash className="text-richblack-100 text-xl"/>) : (<FaRegEye className="text-richblack-100 text-xl"/>)
+                        }
+                      </span>
+                      {
+                        errors?.confirmPassword && (
+                          <p className="text-[#d62929]">please enter your Confirm password</p>
+                        )
+                      }
                     </div>
                   </div>
               </div>
 
-              <div className="mb-6 flex items-center justify-between mt-6">
-                {/* <!-- Remember me checkbox --> */}
-                <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
-                  <input
-                    className="relative float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] 
-                    before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 
-                    before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary
-                     checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute 
-                     checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] 
-                     checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] 
-                     checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white 
-                     checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] 
-                     hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                    type="checkbox"
-                    value=""
-                    id="exampleCheck2"
-                  />
-                  <label
-                    className="inline-block pl-[0.15rem] hover:cursor-pointer"
-                    htmlFor="exampleCheck2"
-                  >
-                    Remember me
-                  </label>
-                </div>                
-              </div>
-
               {/* <!-- Login button --> */}
-              <div className="text-center lg:text-left">
+              <div className="text-center lg:text-left mt-9">
                 <TERipple rippleColor="light">
                   <button
-                    type="button"
+                    type="submit"
                     className="inline-block rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                   >
                     Register
