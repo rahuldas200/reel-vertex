@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Nav.css'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.gif'
 import { Link } from 'react-router-dom';
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className='navbar'>
       <Link to={"/"}>
         <div>
-          <img src={logo} width={150} alt='' className='text-white'></img>
+          <img src={logo}  width={150} alt='' className='text-white'></img>
         </div>
       </Link>
       <div className='flex max-sm:hidden gap-3'>

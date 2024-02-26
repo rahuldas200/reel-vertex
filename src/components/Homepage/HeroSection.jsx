@@ -24,7 +24,10 @@ const HeroSection = () => {
     const handleUplad  = async () =>{        
         try {
             const response  = await fetchReel(formData.link);
-            setDownload_link(response?.result[0]?.url);
+
+            if(response.result[0].url){
+                setDownload_link(response?.result[0]?.url);
+            }
 
         } 
         catch(error){
@@ -81,7 +84,7 @@ const HeroSection = () => {
                 
 
                 {
-                    download_link !== null && (
+                    download_link  && (
                         <button className='py-2 px-3 mt-5 rounded-md bg-black text-richblack-25 flex gap-3 items-center'>
                             <BsDownload className='text-[#ED2121] font-bold'/>
                             <a href = {download_link}> Download </a>

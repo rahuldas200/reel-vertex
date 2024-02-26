@@ -31,6 +31,12 @@ app.get('/', (req, res) => {
         message:"Your server is up and running....."
     })
 });
+app.get("/api/v1/auth", (req, res) => {
+    return res.json({
+        success:true,
+        message:"Your server is up and running....."
+    })
+});
 
 app.listen(PORT, () => {
     console.log(`app listening at http://localhost:${PORT}`);

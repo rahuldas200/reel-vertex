@@ -8,6 +8,7 @@ const mailSender = require("../utils/mailSender");
 
 exports.signUp = async (req, res) => {
     try{
+        console.log(req.body);
 
         const {firstName , lastName ,email , password , confirmPassword ,otp} = req.body;
 
@@ -35,8 +36,6 @@ exports.signUp = async (req, res) => {
         }
 
         const response  = await OTP.find({email}).sort({createdAt:-1}).limit(1);
-
-        console.log(response);
 
         if(response.length === 0){
             res.status(403).json({
@@ -153,7 +152,8 @@ exports.login = async (req,res) => {
 
 exports.sendOtp = async (req,res) => {
     try {
-        const {email} = req.body;
+        const { email} = req.body;
+        console.log(email);
 
         const userPresent = await User.findOne({email});
 

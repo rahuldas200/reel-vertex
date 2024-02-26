@@ -8,7 +8,6 @@ import { createBrowserRouter,RouterProvider} from "react-router-dom";
 import HomePage from './components/Homepage/HomePage';
 import SignIn from './components/auth/SignIn';
 import Register from './components/auth/Register';
-import Otp from './components/auth/Otp';
 
 
 const router = createBrowserRouter([
@@ -24,11 +23,6 @@ const router = createBrowserRouter([
     path:"/signup",
     element:<div className='bg-[#222222]'> <Register/> </div>
   },
-  {
-    path:"/signup/otp",
-    element:<div className='min-h-screen min-w-[100%] bg-[#262626]'><Otp/></div>
-
-  }
 
 ]);
 

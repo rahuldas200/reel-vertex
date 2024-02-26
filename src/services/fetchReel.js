@@ -14,7 +14,7 @@ export const fetchReel = async (urlObject) => {
         
         const response = await apiConnector("GET",DOWNLOAD_URL,null,{link:urlObject},null);
 
-        console.log("FOWNLOAD REEL API RESPONSE",response);
+        console.log("DOWNLOAD REEL API RESPONSE",response);
 
         if(response.data.data.status !== true){
             throw new Error("Fetch reel download link error");

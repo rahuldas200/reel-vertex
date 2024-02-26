@@ -5,6 +5,8 @@ import LoginImg from "../../assets/Login-amico.svg"
 import { useForm } from 'react-hook-form';
 import { FaRegEyeSlash , FaRegEye} from "react-icons/fa6";
 import toast from "react-hot-toast";
+import { login } from "../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
 
@@ -13,6 +15,7 @@ const SignIn = () => {
   const passwordCheck = (cundition) => {
     setShowPassword(!cundition);
   }
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,7 +34,12 @@ const SignIn = () => {
       return;
     }
     reset();
-    console.log(data);
+    const response = await login(data);
+
+    if(response){
+      navigate("/");
+    }
+
   }
   
 

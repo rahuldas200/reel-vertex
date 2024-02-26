@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { FaRegEyeSlash , FaRegEye} from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from 'react-router-dom';
+import {sendOtp , signIn } from '../../services/auth'
+import OtpInput from 'react-otp-input';
 
 
 
@@ -15,6 +17,9 @@ const Register = () => {
 
   const [showPassword , setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const [otpPresent, setOtpPresent] = useState(false);
+  const [formOtp , setFormOtp] = useState(null);
+  const [formData , setFormData] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -26,15 +31,55 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+
+  const submitForm  = async () => {
+
+    const data = {
+      firstName:formData.firstName,
+      lastName:formData.lastName,
+      email : formData.email,
+      password: formData.password,
+      confirmPassword:formData.confirmPassword,
+      otp:formOtp,
+    } 
+    setOtpPresent(null);
+    reset();
+
+    const response = await signIn(data);
+
+    if(response){
+      navigate("/");
+    }
+  }
+
   const onSubmit = async () => {
     const data = getValues();
+    setFormData(data);
+
+    if(data.password !== data.confirmPassword){
+      toast.error("Password and confirm password not matched");
+      return;
+    }
 
     if(data.password.length < 5){
       toast.error("Password length must be gatter than 5");
       return;
     }
-    reset();
-    navigate("/signup/otp")
+
+    try {
+      const response  = await sendOtp({email : formData.email});
+      console.log(response);
+
+      if(response.otp){
+        setOtpPresent(response.otp);
+        toast.success("Please enter your Otp ");
+      }
+
+      
+    }catch {
+      toast.error("Please register again ! ")
+
+    }
     
   }
 
@@ -43,7 +88,7 @@ const Register = () => {
       <Navbar/>
       <section className="h-full w-10/12 mx-auto min-h-screen max-sm:w-11/12 flex mt-2 items-center justify-center max-lm:w-9/12">
     
-      <div className="h-full w-full  ">
+      <div className="h-full w-full round ">
         {/* <!-- Left column container with background--> */}
         <div className="gap-6 flex p-10 max-sm:p-0  h-full  w-full max-lg:border-[1px] border-[#ff3b3b82] rounded-md ">
           <div className="shrink-1 max-lg:hidden flex justify-center items-center   mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
@@ -191,7 +236,7 @@ const Register = () => {
                       id='password'
                       {...register("password",{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
-                      placeholder="Enter your password"
+                      placeholder="Enter password"
                       />
                       <span onClick={() => setShowPassword( (prev) => !prev)} className="absolute top-12 right-4">
                         {
@@ -211,11 +256,11 @@ const Register = () => {
                       id='confirmPassword'
                       {...register("confirmPassword",{required:true})}
                       className="bg-[#272727] px-5 py-3 w-full text-white rounded-md"
-                      placeholder="Enter your confirm password"
+                      placeholder="Enter confirm password"
                       />
                        <span onClick={() => setShowConfirmPassword( (prev) => !prev)} className="absolute top-12 right-4">
                         {
-                          showConfirmPassword ? (<FaRegEyeSlash className="text-richblack-100 text-xl"/>) : (<FaRegEye className="text-richblack-100 text-xl"/>)
+                          showConfirmPassword ? (<FaRegEyeSlash className="text-richblack-100 text-lg"/>) : (<FaRegEye className="text-richblack-100 text-lg"/>)
                         }
                       </span>
                       {
@@ -225,18 +270,59 @@ const Register = () => {
                       }
                     </div>
                   </div>
+                  {
+                    otpPresent && (
+                      <div className='flex flex-col gap-3'>
+                        <p>Enter your otp here</p>
+                        <OtpInput
+                            value={formOtp}
+                            onChange={setFormOtp}
+                            numInputs={6}
+                            renderInput={(props) => <input {...props} />}
+                            containerStyle={'flex justify-between mb-3'}
+                            inputStyle={{
+                                border: "1px solid transparent",
+                                borderRadius: "8px",
+                                width: "54px",
+                                height: "54px",
+                                fontSize: "20px",
+                                color: "#fff",
+                                fontWeight: "600",
+                                caretColor: "white",
+                                background:"#272727"
+                                
+                            }}
+                          />
+                      </div>
+                    )
+                  }
+                  
               </div>
 
               {/* <!-- Login button --> */}
               <div className="text-center lg:text-left mt-9">
-                <TERipple rippleColor="light">
-                  <button
-                    type="submit"
-                    className="inline-block rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                  >
-                    Register
-                  </button>
-                </TERipple>
+                {
+                  otpPresent ? (
+                    <TERipple rippleColor="light">
+                    <button
+                      type="button"   
+                      onClick={submitForm}                  
+                      className="inline-block rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    >
+                      Register
+                    </button>
+                  </TERipple>
+                  ) : (
+                    <TERipple rippleColor="light">
+                    <button
+                      type='submit'
+                      className="inline-block rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    >
+                      Send Otp
+                    </button>
+                  </TERipple>
+                  )
+                }
               </div>
             </form>
           </div>
