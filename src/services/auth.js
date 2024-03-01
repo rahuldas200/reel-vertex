@@ -69,6 +69,8 @@ export const login = async (data) => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
+        result  = response?.data?.user;
+
 
         toast.success("Login successfully");
 
@@ -78,5 +80,26 @@ export const login = async (data) => {
     }
     toast.dismiss(toastId);
     return result;
+}
+
+export const  Logout =  async () => {
+
+    const toastId = toast.loading("Loading...");
+    let result;
+
+    try{
+        
+       localStorage.removeItem("user");
+       localStorage.removeItem("token");
+
+        toast.success("Logout successfully");
+        result = "successfully"
+
+    }catch (error){
+        console.log("Logout error",error);
+    }
+    toast.dismiss(toastId);
+    return result;
+    
 }
 

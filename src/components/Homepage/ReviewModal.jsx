@@ -6,7 +6,7 @@ import { CreateReview } from "../../services/reviewReting";
 import { useNavigate } from "react-router-dom";
 
 
-const ReviewModal = () => {
+const ReviewModal = ({setReviewPage}) => {
   const stars = [
     {
       id: 1,
@@ -33,6 +33,12 @@ const ReviewModal = () => {
   const [rating, setRating] = useState(null);
   const navigate = useNavigate();
   const user  = localStorage.getItem("user");
+
+  if(!user){
+
+    navigate("/login");
+
+  }
 
   const userData = JSON.parse(user);
 
@@ -70,8 +76,8 @@ const ReviewModal = () => {
 
     const response  = await CreateReview(apiData);
 
-    if(!response){
-      navigate("/login")
+    if(response){
+      setReviewPage(false);
     }
 
     

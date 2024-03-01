@@ -55,7 +55,7 @@ const HeroSection = () => {
                 reviewPage ? (
                     <div className='flex flex-col  bg-black mt-8 min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] max-2xl::p-8 max-sm:p-3
                         hero-container p-10  rounded-lg gap-3 max-sm:gap-2 max-sm:min-w-[80%] max-sm:max-w-[90%] max-sm:mt-10 max-sm:min-h-[90%]'> 
-                           <ReviewModal/>
+                           <ReviewModal setReviewPage={setReviewPage}/>
                     </div>
                 ) : (
                     <div className='flex flex-col items-center min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] 

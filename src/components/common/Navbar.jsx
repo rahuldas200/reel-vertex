@@ -4,6 +4,7 @@ import logo from '../../assets/logo.gif'
 import { Link, json } from 'react-router-dom';
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import { Logout } from '../../services/auth';
 
 const Navbar = () => {
 
@@ -28,6 +29,16 @@ const Navbar = () => {
 
   }
 
+  const handelLogout = async () =>{
+
+    const response = await Logout();
+
+    if(response){
+      setUser(null);
+    }
+
+  }
+
 
   return (
 
@@ -46,8 +57,8 @@ const Navbar = () => {
           <div className='w-8 bg-[#fff] h-8 rounded-full cursor-pointer'>
             <img src={user1.image} alt="" /> 
           </div>
-          <div>
-            <button className='text-xl text-bold'>logout</button>
+          <div className='ml-5'>
+            <button onClick={handelLogout} className='text-sm px-4 py-2 bg-black rounded-md text-[#fff] text-bold'>logout</button>
           </div>
          </>
         ) : 
