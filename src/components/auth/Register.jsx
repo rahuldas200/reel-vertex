@@ -42,6 +42,7 @@ const Register = () => {
       confirmPassword:formData.confirmPassword,
       otp:formOtp,
     } 
+
     setOtpPresent(null);
     reset();
 
@@ -50,9 +51,11 @@ const Register = () => {
     if(response){
       navigate("/");
     }
+
   }
 
   const onSubmit = async () => {
+
     const data = getValues();
     setFormData(data);
 
@@ -80,6 +83,7 @@ const Register = () => {
       toast.error("Please register again ! ")
 
     }
+    
     
   }
 

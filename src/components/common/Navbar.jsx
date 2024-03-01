@@ -1,18 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Nav.css'
 import logo from '../../assets/logo.gif'
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
-  const [visible , setVisible] = useState(false);
 
+
+  const [visible , setVisible] = useState(false);
+  const [user1 ,setUser] = useState(null)
+  const user = localStorage.getItem("user");
+
+  useEffect ( () => {
+
+    const userData = JSON.parse(user);
+    setUser(userData);
+
+  },[]);
+
+  console.log(user1);
+
+  
   const handleToggle = (vissibe) => {
+    
     setVisible(!visible);
+
   }
 
+
   return (
+
     <div className='bg-[#4608ad] border-b-black border-b-[1px]'>
     <nav className='navbar'>
       <Link to={"/"}>
@@ -21,12 +39,30 @@ const Navbar = () => {
         </div>
       </Link>
       <div className='flex max-sm:hidden gap-3'>
-        <Link to={"/login"}>
-          <button className="button-85" role="button">Login</button>
-        </Link>
-        <Link to={"/signup"}>
-          <button className="button-85" role="button">Sign up</button>
-        </Link>
+
+      {
+        user1 !== null ? (
+         <>
+          <div className='w-8 bg-[#fff] h-8 rounded-full cursor-pointer'>
+            <img src={user1.image} alt="" /> 
+          </div>
+          <div>
+            <button className='text-xl text-bold'>logout</button>
+          </div>
+         </>
+        ) : 
+        ( 
+        <>
+          <Link to={"/login"}>
+            <button className="button-85" role="button">Login</button>
+          </Link>
+          <Link to={"/signup"}>
+            <button className="button-85" role="button">Sign up</button>
+          </Link>
+        </>
+        )
+      }
+       
       </div>
 
       <button onClick={handleToggle} className='max-sm:flex hidden justify-center items-center'>
@@ -41,12 +77,12 @@ const Navbar = () => {
                 <RxCross2 className='text-2xl text-red-500'/>
               </button>
               <div className='flex flex-col gap-5 mt-5 min-h-36 min-w-40 justify-center '>
-                <Link to={"/login"}>
-                  <button className='py-2 px-2 w-full text-richblack-50 bg-black text-lg font-semibold border-solid border-[2px] border-[#000000cf] rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
-                </Link>
-                <Link to={"/signup"}>
-                  <button className='py-2 px-2 w-full text-richblack-50 border-solid bg-black text-lg  border-[2px] border-[#080707cf]  rounded-md'>Sign up</button>
-                </Link>
+              <Link to={"/login"}>
+                <button className='py-2 px-2 w-full text-richblack-50 bg-black text-lg font-semibold border-solid border-[2px] border-[#000000cf] rounded-md hover:bg-richblack-900 hover:text-richblack-5'>Login</button>
+              </Link>
+              <Link to={"/signup"}>
+                <button className='py-2 px-2 w-full text-richblack-50 border-solid bg-black text-lg  border-[2px] border-[#080707cf]  rounded-md'>Sign up</button>
+              </Link>
               </div>
             </div>
           </div>
@@ -58,3 +94,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

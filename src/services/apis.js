@@ -10,5 +10,10 @@ export const authEndpoints = {
     SEND_OTP :BASE_URL+"/auth/sendotp"
 }
 
+export const ReviewEndPoints = {
+    CREATE_REVIEW_API:BASE_URL+"/auth/createReviewReting",
+    GET_ALL_REVIEW_API : BASE_URL+"/auth/allReview",
+}
+
 
 

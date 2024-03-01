@@ -14,7 +14,9 @@ const SignIn = () => {
 
   const passwordCheck = (cundition) => {
     setShowPassword(!cundition);
+
   }
+
   const navigate = useNavigate();
 
   const {
@@ -26,13 +28,16 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
 
+
   const onSubmit = async () => {
+
     const data = getValues();
 
     if(data.password.length < 5){
       toast.error("Password length must be gatter than 5");
       return;
     }
+    
     reset();
     const response = await login(data);
 

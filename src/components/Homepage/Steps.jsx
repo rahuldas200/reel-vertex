@@ -23,7 +23,6 @@ const Steps = () => {
         }
     ];
 
-    console.log( steps.length === 3+1);
 
   return (
     <div className='w-11/12 mx-auto  mb-10 border-b-[1px] border-b-richblack-500'>

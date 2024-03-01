@@ -4,7 +4,7 @@ const ratingAndReviewSchema = new mongose.Schema(
     {
         user:{
             type:mongose.Schema.Types.ObjectId,
-            required:true,
+            // required:true,
             ref:"User"
         },
         rating: {

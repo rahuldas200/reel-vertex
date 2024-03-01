@@ -4,9 +4,13 @@ import { IoSearch } from "react-icons/io5";
 import { Typewriter } from 'react-simple-typewriter'
 import { fetchReel } from '../../services/fetchReel';
 import { BsDownload } from "react-icons/bs";
+import toast from 'react-hot-toast';
+import ReviewModal from './ReviewModal';
 
 const HeroSection = () => {
+
     const [download_link , setDownload_link] = useState(null);
+    const [reviewPage , setReviewPage] = useState(false);
 
     const [formData, setFormData] = useState( {
         link:'',
@@ -21,12 +25,18 @@ const HeroSection = () => {
         ))
     }
 
-    const handleUplad  = async () =>{        
+    const handleUplad  = async () =>{   
+
         try {
             const response  = await fetchReel(formData.link);
 
             if(response.result[0].url){
                 setDownload_link(response?.result[0]?.url);
+                setReviewPage(true);
+                setTimeout(() => {
+                    toast.success("please review first than you can download your video ");
+                }, 5000);
+
             }
 
         } 
@@ -41,7 +51,14 @@ const HeroSection = () => {
   return (
     <div className='w-[100%] my-0 mx-auto relative h-[70%] overflow-hidden z-0 bg-[#4608ad]'>
         <div className=' w-full h-full flex flex-col justify-center items-center font-inter'>
-            <div className='flex flex-col items-center min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] 
+            {
+                reviewPage ? (
+                    <div className='flex flex-col  bg-black mt-8 min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] max-2xl::p-8 max-sm:p-3
+                        hero-container p-10  rounded-lg gap-3 max-sm:gap-2 max-sm:min-w-[80%] max-sm:max-w-[90%] max-sm:mt-10 max-sm:min-h-[90%]'> 
+                           <ReviewModal/>
+                    </div>
+                ) : (
+                    <div className='flex flex-col items-center min-w-[40%] flex-wrap mb-5 mx-auto min-h-[50%] 
                 hero-container p-10 max-sm:p-1 rounded-lg gap-3 max-sm:gap-2 max-sm:min-w-[80%] max-sm:max-w-[90%] max-sm:mt-10 max-sm:min-h-[90%]'>
                 <div className='text-4xl font-bold text-richblack-5 max-sm:p-0'> <span className='typeWriterI max-sm:text-base'>Download </span> 
                     <span className='typeWriter max-sm:text-base'>
@@ -92,7 +109,9 @@ const HeroSection = () => {
                     )
                 }
                 
-            </div>
+                    </div>
+                )
+            }
            
         </div>
 
