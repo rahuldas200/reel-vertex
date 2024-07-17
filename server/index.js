@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(
     cors({
-        origin: 'https://reel-vertex.vercel.app/',
+        origin: '*',
         credentials:true,       
         optionSuccessStatus:200
         
