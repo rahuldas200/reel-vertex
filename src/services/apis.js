@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000/api/v1';
+const BASE_URL = 'https://reei-vertex-backend.vercel.app/api/v1';
 
 export const downLoadEndPoints = {
     DOWNLOAD_URL :BASE_URL+"/auth/downloadvideo",

@@ -8,9 +8,8 @@ exports.videoDownload = async (req,res) => {
     try {
         const  link  = req.headers['link'];
         console.log(link);
-
         if(!link){
-            console.log("link rwquired")
+            console.log("link required")
             return res.status(404).json({
                 success: false,
                 message: "link rquired",
