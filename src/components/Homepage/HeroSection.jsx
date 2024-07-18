@@ -32,11 +32,7 @@ const HeroSection = () => {
 
             if(response.result[0].url){
                 setDownload_link(response?.result[0]?.url);
-                setReviewPage(true);
-                setTimeout(() => {
-                    toast.success("please review first than you can download your video ");
-                }, 5000);
-
+                toast.success('Video is ready to download')
             }
 
         } 
